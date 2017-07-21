@@ -49,6 +49,10 @@ export default {
   name: 'Compact',
   mixins: [colorMixin],
   props: {
+    defaultColors: {
+      type: Array,
+      default: defaultColors
+    }
   },
   components: {
     'ed-in': editableInput
@@ -56,11 +60,6 @@ export default {
   computed: {
     pick () {
       return this.colors.hex
-    }
-  },
-  data () {
-    return {
-      defaultColors: defaultColors
     }
   },
   methods: {
