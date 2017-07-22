@@ -40,7 +40,7 @@
       </div>
       <div class="demo-list">
         <div class="demo-item">
-          <compact-picker v-model="colors"></compact-picker>
+          <compact-picker v-model="colors" :default-colors="compactColors"></compact-picker>
           <h6>Compact</h6>
         </div>
         <div class="demo-item">
@@ -86,6 +86,18 @@ let defaultProps = {
   a: 1
 }
 
+const defaultColors = [
+  '#FFC107', '#FF9800', '#FF5722', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5', '#2196F3', '#0097A7', '#009688', '#4CAF50', '#AFB42B', '#795548', '#607D8B',
+  '#FFD54F', '#FFB74D', '#FF8A65', '#E57373', '#BA68C8', '#9575CD', '#7986CB', '#4FC3F7', '#4DD0E1', '#4DB6AC', '#81C784', '#DCE775', '#A1887F', '#90A4AE',
+  '#FFECB3', '#FFE0B2', '#FFCCBC', '#FFCDD2', '#E1BEE7', '#D1C4E9', '#C5CAE9', '#B3E5FC', '#B2EBF2', '#B2DFDB', '#DCEDC8', '#F0F4C3', '#D7CCC8', '#CFD8DC'
+]
+const compactColors = defaultColors.map(c => {
+  return { hex: c, disabled: false }
+})
+for (let i = 0; i < defaultColors.length; i += 3) {
+  compactColors[i].disabled = true
+}
+
 export default {
   components: {
     'material-picker': material,
@@ -98,7 +110,8 @@ export default {
   },
   data () {
     return {
-      colors: defaultProps
+      colors: defaultProps,
+      compactColors: compactColors
     }
   },
   computed: {

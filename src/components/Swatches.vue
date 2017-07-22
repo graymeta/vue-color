@@ -26,9 +26,9 @@ var colorMap = [
   'indigo', 'blue', 'lightBlue', 'cyan',
   'teal', 'green', 'lightGreen', 'lime',
   'yellow', 'amber', 'orange', 'deepOrange',
-  'brown', 'blueGrey'
+  'grey', 'blueGrey'
 ]
-var colorLevel = ['900', '700', '500', '300', '100']
+var colorLevel = ['600', '400', '200']
 var defaultColors = (() => {
   var colors = []
   colorMap.forEach((type) => {

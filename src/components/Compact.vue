@@ -3,9 +3,10 @@
     <ul class="vue-color__compact__colors">
       <li class="vue-color__compact__color-item" v-for="c in defaultColors"
         @click="handlerClick(c)"
-        :class="{'vue-color__compact__color-item--white': c === '#FFFFFF' }"
-        :style="{background: c}">
-        <div class="vue-color__compact__dot" v-show="c === pick"></div>
+        :class="{'vue-color__compact__color-item--white': c.hex === '#FFFFFF', 'vue-color__compact__color-item--disabled': c.disabled }"
+        :style="{background: c.hex}">
+        <div class="vue-color__compact__dot" v-show="c.hex === pick"></div>
+        <div class="vue-color__compact__disabled" v-if="c.disabled"></div>
       </li>
     </ul>
     <!-- <div class="vue-color__compact__fields">
@@ -51,7 +52,9 @@ export default {
   props: {
     defaultColors: {
       type: Array,
-      default: defaultColors
+      default: defaultColors.map(c => {
+        return { hex: c, disabled: false }
+      })
     }
   },
   components: {
@@ -64,10 +67,12 @@ export default {
   },
   methods: {
     handlerClick (c) {
-      this.colorChange({
-        hex: c,
-        source: 'hex'
-      })
+      if (!c.disabled) {
+        this.colorChange({
+          hex: c.hex,
+          source: 'hex'
+        })
+      }
     },
     onChange (data) {
       if (!data) {
@@ -118,6 +123,19 @@ export default {
   box-shadow inset 0 0 0 1px #ddd
   .vue-color__compact__dot
       background #000
+.vue-color__compact__color-item--disabled
+  box-shadow inset 0 0 0 1px #333333
+  cursor not-allowed
+  overflow hidden
+  opacity .2
+  .vue-color__compact__disabled
+    background-color #333333
+    height 22px
+    left 7px
+    position absolute
+    top -3px
+    transform rotate(-45deg)
+    width 2px
 .vue-color__compact__dot
   position absolute
   top 5px
